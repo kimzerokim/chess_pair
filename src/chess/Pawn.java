@@ -1,4 +1,4 @@
-package Test;
+package chess;
 
 public class Pawn {
 	final String PAWN_WHITE = "white";
