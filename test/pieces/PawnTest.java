@@ -9,6 +9,7 @@ public class PawnTest extends TestCase {
 		pawn1.setColor("white");
 		assertEquals(pawn1.PAWN_WHITE, pawn1.getColor());
 		
+		
 		Pawn pawn2 = new Pawn();
 		pawn2.setColor("black");
 		assertEquals(pawn2.PAWN_BLACK, pawn2.getColor());
