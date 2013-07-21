@@ -7,18 +7,30 @@ import junit.framework.TestCase;
 public class BoardTest extends TestCase {
 	Board board;
 	
+	@Override
 	protected void setUp() throws Exception {
 		board = new Board();
+		super.setUp();
 	}
 	
 	public void testCreate() {
 		assertNotNull(board);
+		assertEquals(16, board.getPawnNumber());
 	}
 	
 	public void testAddPawns() {
-		Pawn pawn1 = new Pawn();
-		board.addPawn(pawn1);
-		assertEquals(1, board.getPawnNumber());
-		assertEquals(pawn1, board.getPawn(0));
+		//Pawn pawn1 = new Pawn();
+		//board.addPawn(pawn1);
+		//assertEquals(1, board.getPawnNumber());
+		//assertEquals(pawn1, board.getPawn(0));
+	}
+	
+	public void testPawnsNumber() {
+		assertEquals(16, board.getPawnNumber());
+	}
+	
+	public void testRows() {
+		assertEquals("pppppppp", board.getRow(1));
+		assertEquals("PPPPPPPP", board.getRow(6));
 	}
 }

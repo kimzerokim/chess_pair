@@ -1,8 +1,9 @@
 package pieces;
 
 public class Pawn {
-	final String PAWN_WHITE = "white";
-	final String PAWN_BLACK = "black";
+	public static final String PAWN_BLANK = " ";
+	public static final String PAWN_WHITE = "white";
+	public static final String PAWN_BLACK = "black";
 	
 	private String color;
 	
@@ -18,4 +19,8 @@ public class Pawn {
 		return color;
 	}
 	
+	@Override
+	public String toString() {
+		return color == PAWN_WHITE ? "p" : "P";
+	}
 }
