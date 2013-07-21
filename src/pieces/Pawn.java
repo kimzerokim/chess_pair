@@ -8,7 +8,7 @@ public class Pawn {
 	private String color;
 	
 	public Pawn() {
-		this.color = "white";
+		this.color = PAWN_WHITE;
 	}
 
 	public void setColor(String color) {
@@ -21,6 +21,16 @@ public class Pawn {
 	
 	@Override
 	public String toString() {
-		return color == PAWN_WHITE ? "p" : "P";
+		switch (color) {
+		case PAWN_WHITE:
+			return "p";
+			
+		case PAWN_BLACK:
+			return "P";
+			
+		case PAWN_BLANK:
+		default:
+			return ".";
+		}
 	}
 }

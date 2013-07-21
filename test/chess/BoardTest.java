@@ -33,4 +33,19 @@ public class BoardTest extends TestCase {
 		assertEquals("pppppppp", board.getRow(1));
 		assertEquals("PPPPPPPP", board.getRow(6));
 	}
+	
+	public void testPrintBoard() {
+		String dot = "........";
+		String white = "pppppppp";
+		String black = "PPPPPPPP";
+		assertEquals(dot, board.getRow(0));
+		assertEquals(white, board.getRow(1));
+		assertEquals(dot, board.getRow(2));
+		assertEquals(dot, board.getRow(3));
+		assertEquals(dot, board.getRow(4));
+		assertEquals(dot, board.getRow(5));
+		assertEquals(black, board.getRow(6));
+		assertEquals(dot, board.getRow(7));
+		board.print();
+	}
 }

@@ -58,11 +58,17 @@ public class Board {
 
 	public String getRow(int index) {
 		StringBuilder rowInfo = new StringBuilder();
-		
+
 		for (int i = 0; i < 8; i++) {
 			rowInfo.append(rows.get(index).get(i));
 		}
-		
+
 		return rowInfo.toString();
+	}
+
+	public void print() {
+		for (int i = 0; i < rows.size(); i++) {
+			System.out.println(getRow(i));
+		}
 	}
 }
