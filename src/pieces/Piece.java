@@ -14,10 +14,12 @@ public class Piece {
 	
 	private final Color color;
 	private final Type type;
+	private final int power;
 	
 	private Piece(Color color, Type type) {
 		this.color = color;
 		this.type = type;
+		this.power = getPower(type);
 	}
 	
 	public static Piece noPiece() {
@@ -81,6 +83,34 @@ public class Piece {
 	public boolean isBlack() {
 		return (color == Color.BLACK) ? true : false;
 	}
+	
+	public double getScore() {
+		double d;
+		switch (type) {
+		case PAWN: 		d = 0.5; 	break;
+		case KNIGHT:	d = 2.5;	break;
+		case ROOK:		d = 5.0;	break;
+		case BISHOP:	d = 3.0;	break;
+		case QUEEN:		d = 9.0;	break;
+		case KING:		d = 0.0;	break;
+		default:		d = 0.0;	break;
+		}
+		return d;
+	}
+	
+	private int getPower(Type type) {
+		int power = 0;
+		switch(type) {
+		case PAWN:		power = 1; break;
+		case KNIGHT:	power = 2; break;
+		case ROOK:		power = 3; break;
+		case BISHOP:	power = 4; break;
+		case QUEEN:		power = 5; break;
+		case KING:		power = 6; break;
+		default:		power = 0; break;
+		}
+		return power;
+	}
 
 	@Override
 	public int hashCode() {
@@ -91,14 +121,15 @@ public class Piece {
 		return result;
 	}
 
-	public boolean equals(Piece piece) {
+	@Override
+	public boolean equals(Object piece) {
 		if (this == piece)
 			return true;
 		if (piece == null)
 			return false;
 		if (getClass() != piece.getClass())
 			return false;
-		Piece other =  piece;
+		Piece other = (Piece) piece;
 		if (color != other.color)
 			return false;
 		if (type != other.type)

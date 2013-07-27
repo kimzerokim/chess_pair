@@ -6,15 +6,18 @@ import pieces.Piece;
 import pieces.Piece.Color;
 
 public class Board {
-	private ArrayList<ArrayList<Piece>> rows = new ArrayList<ArrayList<Piece>>();
+	private ArrayList<ArrayList<Piece>> rows;
 
 	public Board() {
+		initializeEmpty();
 	}
 	
 	public boolean isEmpty() {
+		Piece noPiece = Piece.noPiece();
 		for (ArrayList<Piece> row : rows) {
-			if (!row.isEmpty())
-				return false;
+			for (Piece piece : row)
+				if (!piece.equals(noPiece))
+					return false;
 		}
 		return true;
 	}
@@ -28,6 +31,18 @@ public class Board {
 			}
 		}
 		return count;
+	}
+	
+	public double getScore(Color color) {
+		double score = 0;
+		for (ArrayList<Piece> row : rows) {
+			for (Piece piece : row) {
+				if (piece.getColor() == color)
+					score += piece.getScore();
+			}
+		}
+		score += countPawnBonus(color);
+		return score;
 	}
 	
 	public void setPiece(Piece piece, String position) {
@@ -75,12 +90,19 @@ public class Board {
 	}
 	
 	public void initialize() {
+		rows = new ArrayList<ArrayList<Piece>>();
 		rows.add(createBlackRow());
 		rows.add(createPawnRow(Color.BLACK));
 		for (int i=0; i<4; i++)
 			rows.add(createBlankRow());
 		rows.add(createPawnRow(Color.WHITE));
 		rows.add(createWhiteRow());
+	}
+	
+	public void initializeEmpty() {
+		rows = new ArrayList<ArrayList<Piece>>();
+		for (int i=0; i<8; i++)
+			rows.add(createBlankRow());
 	}
 	
 	private ArrayList<Piece> createWhiteRow() {
@@ -125,5 +147,34 @@ public class Board {
 		for (int i=0; i<8; i++)
 			arr.add(Piece.noPiece());
 		return arr;
+	}
+	
+	private double countPawnBonus(Piece.Color color) {
+		double retBonus = 0.0;
+		
+		ArrayList<Integer> storage = new ArrayList<Integer>(8);
+		for (int i=0; i<8; i++)
+			storage.add(new Integer(0));
+		
+		// count pawn num by column
+		final Piece pawn = Piece.createPawn(color);
+		for (ArrayList<Piece> row : rows) {
+			for (int i=0; i<row.size(); i++) {
+				Piece piece = row.get(i);
+				if (piece.equals(pawn)) {
+					Integer count = storage.get(i);
+					storage.set(i, new Integer(count+1));
+				}
+			}
+		}
+		
+		// calculate bonus
+		for (Integer count : storage) {
+			if (count >= 2) {
+				retBonus += (0.5 * count);
+			}
+		}
+		
+		return retBonus;
 	}
 }

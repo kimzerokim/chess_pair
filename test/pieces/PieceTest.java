@@ -19,9 +19,9 @@ public class PieceTest extends TestCase {
 	private void verifyCreation(Piece whitePiece, Piece blackPiece, Piece.Type type, char representation) {
 		assertTrue(whitePiece.isWhite());
 		assertEquals(type, whitePiece.getType());
-		assertEquals(representation, whitePiece.getRepresentation());
+		assertEquals(Character.toUpperCase(representation), whitePiece.getRepresentation());
 		assertTrue(blackPiece.isBlack());
 		assertEquals(type, blackPiece.getType());
-		assertEquals(Character.toUpperCase(representation), blackPiece.getRepresentation());
+		assertEquals(representation, blackPiece.getRepresentation());
 	}
 }
