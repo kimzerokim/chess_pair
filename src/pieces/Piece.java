@@ -3,26 +3,27 @@ package pieces;
 public class Piece {
 	public static final String BLANK = " ";
 	
-	public enum Color {WHITE, BLACK, BLANK}
+	public enum Color 	{WHITE, BLACK, BLANK}
+	public enum Type 	{ROOK, KNIGHT, BISHOP, QUEEN, KING, PAWN, EMPTY}
 	
 	private final Color color;
-	private final String name;
+	private final Type type;
 	
-	private Piece(Color color, String name) {
+	private Piece(Color color, Type type) {
 		this.color = color;
-		this.name = name;
+		this.type = type;
 	}
 	
-	public static Piece create(Color color, String name) {
-		return new Piece(color, name);
+	public static Piece create(Color color, Type type) {
+		return new Piece(color, type);
 	}
 	
 	public Color getColor() {
 		return color;
 	}
 	
-	public String getName() {
-		return name;
+	public Type getType() {
+		return type;
 	}
 	
 	public boolean isWhite() {
@@ -37,13 +38,13 @@ public class Piece {
 	public String toString() {
 		String retStr = ".";
 
-		switch (name) {
-		case "pawn": 	retStr = "p"; 	break;
-		case "knight":	retStr = "n";	break;
-		case "rook":	retStr = "r";	break;
-		case "bishop":	retStr = "b";	break;
-		case "queen":	retStr = "q";	break;
-		case "king":	retStr = "k";	break;
+		switch (type) {
+		case PAWN: 		retStr = "p"; 	break;
+		case KNIGHT:	retStr = "n";	break;
+		case ROOK:		retStr = "r";	break;
+		case BISHOP:	retStr = "b";	break;
+		case QUEEN:		retStr = "q";	break;
+		case KING:		retStr = "k";	break;
 		}
 		
 		switch (color) {
