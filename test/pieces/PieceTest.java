@@ -4,24 +4,24 @@ import junit.framework.TestCase;
 
 public class PieceTest extends TestCase {
 	public void testCreate() {
-		Piece pawn1 = Piece.create(Piece.Color.WHITE, Piece.Type.PAWN);
-		assertEquals(Piece.Color.WHITE, pawn1.getColor());
-		assertEquals("P", pawn1.toString());
-		assertEquals(Piece.Type.PAWN, pawn1.getType());
-
-		Piece pawn2 = Piece.create(Piece.Color.BLACK, Piece.Type.PAWN);
-		assertEquals(Piece.Color.BLACK, pawn2.getColor());
-		assertEquals("p", pawn2.toString());
-		assertEquals(Piece.Type.PAWN, pawn2.getType());
+		verifyCreation(Piece.createPawn(Piece.Color.WHITE), Piece.createPawn(Piece.Color.BLACK), Piece.Type.PAWN, Piece.PAWN_REPRESENTATION);
+		verifyCreation(Piece.createRook(Piece.Color.WHITE), Piece.createRook(Piece.Color.BLACK), Piece.Type.ROOK, Piece.ROOK_REPRESENTATION);
+		verifyCreation(Piece.createKnight(Piece.Color.WHITE), Piece.createKnight(Piece.Color.BLACK), Piece.Type.KNIGHT, Piece.KNIGHT_REPRESENTATION);
+		verifyCreation(Piece.createBishop(Piece.Color.WHITE), Piece.createBishop(Piece.Color.BLACK), Piece.Type.BISHOP, Piece.BISHOP_REPRESENTATION);
+		verifyCreation(Piece.createQueen(Piece.Color.WHITE), Piece.createQueen(Piece.Color.BLACK), Piece.Type.QUEEN, Piece.QUEEN_REPRESENTATION);
+		verifyCreation(Piece.createKing(Piece.Color.WHITE), Piece.createKing(Piece.Color.BLACK), Piece.Type.KING, Piece.KING_REPRESENTATION);
+		
+		Piece blank = Piece.noPiece();
+		assertEquals('.', blank.getRepresentation());
+		assertEquals(Piece.Type.NO_PIECE, blank.getType());
 	}
 
-	public void testColor() throws Exception {
-		Piece whitePawn = Piece.create(Piece.Color.WHITE, Piece.Type.PAWN);
-		assertTrue(whitePawn.isWhite());
-		assertFalse(whitePawn.isBlack());
-
-		Piece blackPawn = Piece.create(Piece.Color.BLACK, Piece.Type.PAWN);
-		assertTrue(blackPawn.isBlack());
-		assertFalse(blackPawn.isWhite());
+	private void verifyCreation(Piece whitePiece, Piece blackPiece, Piece.Type type, char representation) {
+		assertTrue(whitePiece.isWhite());
+		assertEquals(type, whitePiece.getType());
+		assertEquals(representation, whitePiece.getRepresentation());
+		assertTrue(blackPiece.isBlack());
+		assertEquals(type, blackPiece.getType());
+		assertEquals(Character.toUpperCase(representation), blackPiece.getRepresentation());
 	}
 }

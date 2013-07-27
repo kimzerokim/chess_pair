@@ -2,73 +2,99 @@ package chess;
 
 import java.util.ArrayList;
 
-import pieces.Pawn;
+import pieces.Piece;
+import pieces.Piece.Color;
 
 public class Board {
-
-	ArrayList<Pawn> pawns = new ArrayList<Pawn>();
-
-	private ArrayList<ArrayList<Pawn>> rows = new ArrayList<ArrayList<Pawn>>();
+	private ArrayList<ArrayList<Piece>> rows = new ArrayList<ArrayList<Piece>>();
 
 	public Board() {
-		for (int i = 0; i < 16; i++)
-			addPawn(new Pawn());
 		initialize();
 	}
-
-	public void addPawn(Pawn pawn) {
-		pawns.add(pawn);
-	}
-
-	public int getPawnNumber() {
-		return pawns.size();
-	}
-
-	public Pawn getPawn(int index) {
-		return pawns.get(index);
+	
+	public int getCount(Piece other) {
+		int count = 0;
+		for (ArrayList<Piece> row : rows) {
+			for (Piece piece : row) {
+				if (piece.equals(other))
+					count++;
+			}
+		}
+		return count;
 	}
 
 	public void initialize() {
-		for (int j = 0; j < 8; j++) {
-			ArrayList<Pawn> row = new ArrayList<Pawn>();
-			if (j == 1) {
-				for (int i = 0; i < 8; i++) {
-					Pawn pawn = new Pawn();
-					pawn.setColor(Pawn.PAWN_WHITE);
-					row.add(pawn);
-				}
-			}
-			else if (j == 6) {
-				for (int i = 0; i < 8; i++) {
-					Pawn pawn = new Pawn();
-					pawn.setColor(Pawn.PAWN_BLACK);
-					row.add(pawn);
-				}
-			}
-			else {
-				for (int i = 0; i < 8; i++) {
-					Pawn pawn = new Pawn();
-					pawn.setColor(Pawn.PAWN_BLANK);
-					row.add(pawn);
-				}
-			}
-			rows.add(row);
-		}
+		rows.add(createWhiteRow());
+		rows.add(createPawnRow(Color.WHITE));
+		for (int i=0; i<4; i++)
+			rows.add(createBlankRow());
+		rows.add(createPawnRow(Color.BLACK));
+		rows.add(createBlackRow());
 	}
 
 	public String getRow(int index) {
 		StringBuilder rowInfo = new StringBuilder();
+		ArrayList<Piece> row = rows.get(index);
 
 		for (int i = 0; i < 8; i++) {
-			rowInfo.append(rows.get(index).get(i));
+			rowInfo.append(row.get(i).getRepresentation());
 		}
 
 		return rowInfo.toString();
 	}
 
 	public void print() {
-		for (int i = 0; i < rows.size(); i++) {
-			System.out.println(getRow(i));
+		StringBuilder sb = new StringBuilder();
+		for (ArrayList<Piece> row : rows) {
+			for (Piece piece : row) {
+				sb.append(piece.getRepresentation());
+			}
+			sb.append(System.lineSeparator());
 		}
+		System.out.println(sb.toString());
+	}
+	
+	private ArrayList<Piece> createWhiteRow() {
+		ArrayList<Piece> arr = new ArrayList<Piece>(8);
+		Color color = Color.WHITE;
+		arr.add(Piece.createRook(color));
+		arr.add(Piece.createKnight(color));
+		arr.add(Piece.createBishop(color));
+		arr.add(Piece.createQueen(color));
+		arr.add(Piece.createKing(color));
+		arr.add(Piece.createBishop(color));
+		arr.add(Piece.createKnight(color));
+		arr.add(Piece.createRook(color));
+		
+		return arr;
+	}
+	
+	private ArrayList<Piece> createBlackRow() {
+		ArrayList<Piece> arr = new ArrayList<Piece>(8);
+		Color color = Color.BLACK;
+		arr.add(Piece.createRook(color));
+		arr.add(Piece.createKnight(color));
+		arr.add(Piece.createBishop(color));
+		arr.add(Piece.createQueen(color));
+		arr.add(Piece.createKing(color));
+		arr.add(Piece.createBishop(color));
+		arr.add(Piece.createKnight(color));
+		arr.add(Piece.createRook(color));
+		
+		return arr;
+	}
+	
+	private ArrayList<Piece> createPawnRow(Color color) {
+		ArrayList<Piece> arr = new ArrayList<Piece>(8);
+		for (int i=0; i<8; i++)
+			arr.add(Piece.createPawn(color));
+		return arr;
+	}
+	
+	private ArrayList<Piece> createBlankRow() {
+		ArrayList<Piece> arr = new ArrayList<Piece>(8);
+		for (int i=0; i<8; i++)
+			arr.add(Piece.noPiece());
+		return arr;
 	}
 }
