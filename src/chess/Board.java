@@ -23,15 +23,21 @@ public class Board {
 		return count;
 	}
 
-	public void initialize() {
-		rows.add(createWhiteRow());
-		rows.add(createPawnRow(Color.WHITE));
-		for (int i=0; i<4; i++)
-			rows.add(createBlankRow());
-		rows.add(createPawnRow(Color.BLACK));
-		rows.add(createBlackRow());
+	//   a b c d e f g h
+	// 8
+	// 7
+	// 6
+	// 5
+	// 4
+	// 3
+	// 2
+	// 1
+	public Piece getPiece(String position) {
+		int x = Position.getX(position);
+		int y = Position.getY(position);
+		return rows.get(y).get(x);
 	}
-
+	
 	public String getRow(int index) {
 		StringBuilder rowInfo = new StringBuilder();
 		ArrayList<Piece> row = rows.get(index);
@@ -46,12 +52,22 @@ public class Board {
 	public void print() {
 		StringBuilder sb = new StringBuilder();
 		for (ArrayList<Piece> row : rows) {
-			for (Piece piece : row) {
-				sb.append(piece.getRepresentation());
-			}
-			sb.append(System.lineSeparator());
+			StringBuilder tempSb = new StringBuilder();
+			for (Piece piece : row)
+				tempSb.append(piece.getRepresentation());
+			tempSb.append(System.lineSeparator());
+			sb = tempSb.append(sb);
 		}
 		System.out.println(sb.toString());
+	}
+	
+	private void initialize() {
+		rows.add(createBlackRow());
+		rows.add(createPawnRow(Color.BLACK));
+		for (int i=0; i<4; i++)
+			rows.add(createBlankRow());
+		rows.add(createPawnRow(Color.WHITE));
+		rows.add(createWhiteRow());
 	}
 	
 	private ArrayList<Piece> createWhiteRow() {
