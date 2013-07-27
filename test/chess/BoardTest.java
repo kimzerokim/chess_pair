@@ -12,14 +12,13 @@ public class BoardTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		board = new Board();
+		board.initialize();
 		super.setUp();
 	}
 	
-	public void testAddPawns() {
-		//Pawn pawn1 = new Pawn();
-		//board.addPawn(pawn1);
-		//assertEquals(1, board.getPawnNumber());
-		//assertEquals(pawn1, board.getPawn(0));
+	public void testCreate() throws Exception {
+		Board board = new Board();
+		assertTrue(board.isEmpty());
 	}
 	
 	public void testRows() {

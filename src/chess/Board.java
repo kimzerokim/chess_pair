@@ -9,7 +9,14 @@ public class Board {
 	private ArrayList<ArrayList<Piece>> rows = new ArrayList<ArrayList<Piece>>();
 
 	public Board() {
-		initialize();
+	}
+	
+	public boolean isEmpty() {
+		for (ArrayList<Piece> row : rows) {
+			if (!row.isEmpty())
+				return false;
+		}
+		return true;
 	}
 	
 	public int getCount(Piece other) {
@@ -61,7 +68,7 @@ public class Board {
 		System.out.println(sb.toString());
 	}
 	
-	private void initialize() {
+	public void initialize() {
 		rows.add(createBlackRow());
 		rows.add(createPawnRow(Color.BLACK));
 		for (int i=0; i<4; i++)
