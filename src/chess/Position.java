@@ -11,7 +11,7 @@ public class Position {
 	// 2
 	// 1
 	public static int getX(String position) {
-		int x = position.charAt(0) - 'a';
+		int x = Character.toLowerCase(position.charAt(0)) - 'a';
 		return x;
 	}
 	

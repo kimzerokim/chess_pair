@@ -21,6 +21,12 @@ public class BoardTest extends TestCase {
 		assertTrue(board.isEmpty());
 	}
 	
+	public void testSetPiece() throws Exception {
+		Piece knight = Piece.createKnight(Color.WHITE);
+		board.setPiece(knight, "b6");
+		assertEquals(knight, board.getPiece("b6"));
+	}
+	
 	public void testRows() {
 		assertEquals(BLACK_PAWN_ROW, board.getRow(1));
 		assertEquals(WHITE_PAWN_ROW, board.getRow(6));

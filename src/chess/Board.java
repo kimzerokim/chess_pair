@@ -29,6 +29,12 @@ public class Board {
 		}
 		return count;
 	}
+	
+	public void setPiece(Piece piece, String position) {
+		int x = Position.getX(position);
+		int y = Position.getY(position);
+		rows.get(y).set(x, piece);
+	}
 
 	//   a b c d e f g h
 	// 8
