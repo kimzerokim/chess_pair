@@ -8,18 +8,28 @@ public class Piece {
 	public static final char BISHOP_REPRESENTATION = 'b';
 	public static final char QUEEN_REPRESENTATION = 'q';
 	public static final char KING_REPRESENTATION = 'k';
-	
+
 	public enum Color 	{WHITE, BLACK, BLANK}
-	public enum Type 	{ROOK, KNIGHT, BISHOP, QUEEN, KING, PAWN, NO_PIECE}
+	public enum Type 	{
+		ROOK(5.0), KNIGHT(2.5), BISHOP(3.0), QUEEN(9.0), KING(0.0), PAWN(0.5), NO_PIECE(0.0);
+		
+		private double score=0.0;
+		
+		Type(double score) {
+			this.score = score;
+		}
+		
+		double getScore() {
+			return score;
+		}
+	}
 	
 	private final Color color;
 	private final Type type;
-	private final int power;
 	
 	private Piece(Color color, Type type) {
 		this.color = color;
 		this.type = type;
-		this.power = getPower(type);
 	}
 	
 	public static Piece noPiece() {
@@ -85,33 +95,9 @@ public class Piece {
 	}
 	
 	public double getScore() {
-		double d;
-		switch (type) {
-		case PAWN: 		d = 0.5; 	break;
-		case KNIGHT:	d = 2.5;	break;
-		case ROOK:		d = 5.0;	break;
-		case BISHOP:	d = 3.0;	break;
-		case QUEEN:		d = 9.0;	break;
-		case KING:		d = 0.0;	break;
-		default:		d = 0.0;	break;
-		}
-		return d;
+		return type.getScore();
 	}
 	
-	private int getPower(Type type) {
-		int power = 0;
-		switch(type) {
-		case PAWN:		power = 1; break;
-		case KNIGHT:	power = 2; break;
-		case ROOK:		power = 3; break;
-		case BISHOP:	power = 4; break;
-		case QUEEN:		power = 5; break;
-		case KING:		power = 6; break;
-		default:		power = 0; break;
-		}
-		return power;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
