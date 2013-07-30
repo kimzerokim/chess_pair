@@ -11,7 +11,7 @@ public class Piece {
 
 	public enum Color 	{WHITE, BLACK, BLANK}
 	public enum Type 	{
-		ROOK(5.0), KNIGHT(2.5), BISHOP(3.0), QUEEN(9.0), KING(0.0), PAWN(0.5), NO_PIECE(0.0);
+		ROOK(5.0), KNIGHT(2.5), BISHOP(3.0), QUEEN(9.0), KING(0.0), PAWN(1.0), NO_PIECE(0.0);
 		
 		private double score=0.0;
 		

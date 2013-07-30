@@ -150,6 +150,7 @@ public class Board {
 	}
 	
 	private double countPawnBonus(Piece.Color color) {
+		final double minusRate = -0.5;
 		double retBonus = 0.0;
 		
 		ArrayList<Integer> storage = new ArrayList<Integer>(8);
@@ -171,7 +172,7 @@ public class Board {
 		// calculate bonus
 		for (Integer count : storage) {
 			if (count >= 2) {
-				retBonus += (0.5 * count);
+				retBonus += (minusRate * count);
 			}
 		}
 		

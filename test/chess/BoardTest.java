@@ -67,7 +67,7 @@ public class BoardTest extends TestCase {
 		board.setPiece(whitePawn, "a6");
 		board.setPiece(whitePawn, "a5");
 		
-		assertEquals(4.0, board.getScore(Color.WHITE), 0.05);
+		assertEquals(2.0, board.getScore(Color.WHITE), 0.05);
 	}
 	
 	public void testCountScore() throws Exception {
@@ -80,7 +80,7 @@ public class BoardTest extends TestCase {
 		board.setPiece(Piece.createBishop(Color.WHITE), "d7");
 		board.setPiece(Piece.createPawn(Color.WHITE), "b6");
 		board.setPiece(Piece.createQueen(Color.WHITE), "e6");
-		assertEquals(18.5, board.getScore(Color.WHITE), TOLERANCE);
+		assertEquals(20.0, board.getScore(Color.WHITE), TOLERANCE);
 		
 		board.setPiece(Piece.createKnight(Color.BLACK), "f4");
 		board.setPiece(Piece.createQueen(Color.BLACK), "g4");
