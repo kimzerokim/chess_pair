@@ -1,8 +1,15 @@
 package pieces;
 
 import junit.framework.TestCase;
+import pieces.Piece.Color;
+import chess.Board;
 
 public class PieceTest extends TestCase {
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+	}
+	
 	public void testCreate() {
 		verifyCreation(Piece.createPawn(Piece.Color.WHITE), Piece.createPawn(Piece.Color.BLACK), Piece.Type.PAWN, Piece.PAWN_REPRESENTATION);
 		verifyCreation(Piece.createRook(Piece.Color.WHITE), Piece.createRook(Piece.Color.BLACK), Piece.Type.ROOK, Piece.ROOK_REPRESENTATION);
@@ -23,5 +30,22 @@ public class PieceTest extends TestCase {
 		assertTrue(blackPiece.isBlack());
 		assertEquals(type, blackPiece.getType());
 		assertEquals(representation, blackPiece.getRepresentation());
+	}
+	
+	public void testSetPosition() throws Exception {
+		final String positionA5 = "a5";
+		verifyPiecePosition(Piece.createBishop(Color.WHITE), Piece.createBishop(Color.BLACK), positionA5);
+		verifyPiecePosition(Piece.createKing(Color.WHITE), Piece.createKing(Color.BLACK), positionA5);
+		verifyPiecePosition(Piece.createKnight(Color.WHITE), Piece.createKnight(Color.BLACK), positionA5);
+		verifyPiecePosition(Piece.createPawn(Color.WHITE), Piece.createPawn(Color.BLACK), positionA5);
+		verifyPiecePosition(Piece.createQueen(Color.WHITE), Piece.createQueen(Color.BLACK), positionA5);
+		verifyPiecePosition(Piece.createRook(Color.WHITE), Piece.createRook(Color.BLACK), positionA5);
+	}
+	
+	private void verifyPiecePosition(Piece whitePiece, Piece blackPiece, String position) {
+		whitePiece.setPosition(position);
+		assertEquals(position, whitePiece.getPosition());
+		blackPiece.setPosition(position);
+		assertEquals(position, blackPiece.getPosition());
 	}
 }

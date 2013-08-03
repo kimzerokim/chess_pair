@@ -28,6 +28,8 @@ public abstract class Piece {
 	protected final Type type;
 	protected final char representation;
 	
+	protected String position;
+	
 	protected Piece(Color color, Type type, char representation) {
 		this.color = color;
 		this.type = type;
@@ -68,6 +70,14 @@ public abstract class Piece {
 	
 	public Type getType() {
 		return type;
+	}
+	
+	void setPosition(String position) {
+		this.position = position;
+	}
+
+	String getPosition() {
+		return position;
 	}
 	
 	public char getRepresentation() {
