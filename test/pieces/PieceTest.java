@@ -11,7 +11,7 @@ public class PieceTest extends TestCase {
 		verifyCreation(Piece.createQueen(Piece.Color.WHITE), Piece.createQueen(Piece.Color.BLACK), Piece.Type.QUEEN, Piece.QUEEN_REPRESENTATION);
 		verifyCreation(Piece.createKing(Piece.Color.WHITE), Piece.createKing(Piece.Color.BLACK), Piece.Type.KING, Piece.KING_REPRESENTATION);
 		
-		Piece blank = Piece.noPiece();
+		Piece blank = Piece.createNoPiece();
 		assertEquals('.', blank.getRepresentation());
 		assertEquals(Piece.Type.NO_PIECE, blank.getType());
 	}

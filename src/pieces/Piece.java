@@ -1,6 +1,6 @@
 package pieces;
 
-public class Piece {
+public abstract class Piece {
 	public static final char BLANK_REPRESENTATION = '.';
 	public static final char PAWN_REPRESENTATION = 'p';
 	public static final char ROOK_REPRESENTATION = 'r';
@@ -24,40 +24,42 @@ public class Piece {
 		}
 	}
 	
-	private final Color color;
-	private final Type type;
+	protected final Color color;
+	protected final Type type;
+	protected final char representation;
 	
-	private Piece(Color color, Type type) {
+	protected Piece(Color color, Type type, char representation) {
 		this.color = color;
 		this.type = type;
+		this.representation = representation;
 	}
 	
-	public static Piece noPiece() {
-		return new Piece(Color.BLANK, Type.NO_PIECE);
+	public static Piece createNoPiece() {
+		return new NoPiece(Color.BLANK, Type.NO_PIECE, BLANK_REPRESENTATION);
 	}
 	
 	public static Piece createPawn(Color color) {
-		return new Piece(color, Type.PAWN);
+		return new Pawn(color, Type.PAWN, PAWN_REPRESENTATION);
 	}
 	
 	public static Piece createRook(Color color) {
-		return new Piece(color, Type.ROOK);
+		return new Rook(color, Type.ROOK, ROOK_REPRESENTATION);
 	}
 	
 	public static Piece createKnight(Color color) {
-		return new Piece(color, Type.KNIGHT);
+		return new Knight(color, Type.KNIGHT, KNIGHT_REPRESENTATION);
 	}
 	
 	public static Piece createBishop(Color color) {
-		return new Piece(color, Type.BISHOP);
+		return new Bishop(color, Type.BISHOP, BISHOP_REPRESENTATION);
 	}
 	
 	public static Piece createQueen(Color color) {
-		return new Piece(color, Type.QUEEN);
+		return new Queen(color, Type.QUEEN, QUEEN_REPRESENTATION);
 	}
 	
 	public static Piece createKing(Color color) {
-		return new Piece(color, Type.KING);
+		return new King(color, Type.KING, KING_REPRESENTATION);
 	}
 	
 	public Color getColor() {
@@ -69,21 +71,10 @@ public class Piece {
 	}
 	
 	public char getRepresentation() {
-		char c = ' ';
-		switch (type) {
-		case PAWN: 		c = 'p'; 	break;
-		case KNIGHT:	c = 'n';	break;
-		case ROOK:		c = 'r';	break;
-		case BISHOP:	c = 'b';	break;
-		case QUEEN:		c = 'q';	break;
-		case KING:		c = 'k';	break;
-		default:		c = '.';	break;
-		}
-		
 		if (color == Color.WHITE)
-			return Character.toUpperCase(c);
+			return Character.toUpperCase(representation);
 		else
-			return c;
+			return representation;
 	}
 	
 	public boolean isWhite() {
@@ -96,5 +87,30 @@ public class Piece {
 	
 	public double getScore() {
 		return type.getScore();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Piece other = (Piece) obj;
+		if (color != other.color)
+			return false;
+		if (type != other.type)
+			return false;
+		return true;
 	}
 }

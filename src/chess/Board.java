@@ -13,7 +13,7 @@ public class Board {
 	}
 	
 	public boolean isEmpty() {
-		Piece noPiece = Piece.noPiece();
+		Piece noPiece = Piece.createNoPiece();
 		for (ArrayList<Piece> row : rows) {
 			for (Piece piece : row)
 				if (!piece.equals(noPiece))
@@ -145,7 +145,7 @@ public class Board {
 	private ArrayList<Piece> createBlankRow() {
 		ArrayList<Piece> arr = new ArrayList<Piece>(8);
 		for (int i=0; i<8; i++)
-			arr.add(Piece.noPiece());
+			arr.add(Piece.createNoPiece());
 		return arr;
 	}
 	
