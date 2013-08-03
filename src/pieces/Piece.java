@@ -72,8 +72,9 @@ public abstract class Piece {
 		return type;
 	}
 	
-	public void setPosition(String position) {
+	public Piece setPosition(String position) {
 		this.position = position;
+		return this;
 	}
 
 	public String getPosition() {

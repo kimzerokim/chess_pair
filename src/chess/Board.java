@@ -7,8 +7,7 @@ import pieces.Piece;
 import pieces.Piece.Color;
 
 public class Board {
-	private ArrayList<ArrayList<Piece>> rows;
-
+	private List<ArrayList<Piece>> rows;
 	public Board() {
 		initializeEmpty();
 	}
@@ -93,85 +92,84 @@ public class Board {
 	public void initialize() {
 		rows = new ArrayList<ArrayList<Piece>>();
 		rows.add(createBlackRow());
-		rows.add(createPawnRow(Color.BLACK));
-		for (int i=0; i<4; i++)
-			rows.add(createBlankRow());
-		rows.add(createPawnRow(Color.WHITE));
+		rows.add(createBlackPawnRow());
+		String basePosition = "a3";
+		for (int i=0; i<4; i++) {
+			rows.add(createBlankRow(basePosition));
+			basePosition = Position.increaseRow(basePosition);
+		}
+		rows.add(createWhitePawnRow());
 		rows.add(createWhiteRow());
 	}
 	
 	public void initializeEmpty() {
 		rows = new ArrayList<ArrayList<Piece>>();
-		for (int i=0; i<8; i++)
-			rows.add(createBlankRow());
-	}
-	
-	private void initWhitePieces() {
-		final Color white = Color.WHITE;
-
-		List<Piece> pawns = new ArrayList<Piece>(8);
+		String basePosition = "a1";
 		for (int i=0; i<8; i++) {
-			pawns.add(Piece.createPawn(white));
+			rows.add(createBlankRow(basePosition));
+			basePosition = Position.increaseRow(basePosition);
 		}
-		
-		pawns.get(0).setPosition("a7");
-		pawns.get(1).setPosition("b7");
-		pawns.get(2).setPosition("c7");
-		pawns.get(3).setPosition("d7");
-		pawns.get(4).setPosition("e7");
-		pawns.get(5).setPosition("f7");
-		pawns.get(6).setPosition("g7");
-		pawns.get(7).setPosition("h7");
-		
-		
-		// set piece position
-		
-		// set board to piece
-		// display method modify
 	}
 	
 	private ArrayList<Piece> createWhiteRow() {
-		ArrayList<Piece> arr = new ArrayList<Piece>(8);
-		Color color = Color.WHITE;
-		arr.add(Piece.createRook(color));
-		arr.add(Piece.createKnight(color));
-		arr.add(Piece.createBishop(color));
-		arr.add(Piece.createQueen(color));
-		arr.add(Piece.createKing(color));
-		arr.add(Piece.createBishop(color));
-		arr.add(Piece.createKnight(color));
-		arr.add(Piece.createRook(color));
-		
-		return arr;
+		ArrayList<Piece> row = new ArrayList<Piece>(8);
+		row.add(Piece.createRook(Color.WHITE).setPosition("a8"));
+		row.add(Piece.createKnight(Color.WHITE).setPosition("b8"));
+		row.add(Piece.createBishop(Color.WHITE).setPosition("c8"));
+		row.add(Piece.createQueen(Color.WHITE).setPosition("d8"));
+		row.add(Piece.createKing(Color.WHITE).setPosition("e8"));
+		row.add(Piece.createBishop(Color.WHITE).setPosition("f8"));
+		row.add(Piece.createKnight(Color.WHITE).setPosition("g8"));
+		row.add(Piece.createRook(Color.WHITE).setPosition("h8"));
+		return row;
 	}
 	
 	private ArrayList<Piece> createBlackRow() {
-		ArrayList<Piece> arr = new ArrayList<Piece>(8);
-		Color color = Color.BLACK;
-		arr.add(Piece.createRook(color));
-		arr.add(Piece.createKnight(color));
-		arr.add(Piece.createBishop(color));
-		arr.add(Piece.createQueen(color));
-		arr.add(Piece.createKing(color));
-		arr.add(Piece.createBishop(color));
-		arr.add(Piece.createKnight(color));
-		arr.add(Piece.createRook(color));
-		
-		return arr;
+		ArrayList<Piece> row = new ArrayList<Piece>(8);
+		row.add(Piece.createRook(Color.BLACK).setPosition("a1"));
+		row.add(Piece.createKnight(Color.BLACK).setPosition("b1"));
+		row.add(Piece.createBishop(Color.BLACK).setPosition("c1"));
+		row.add(Piece.createQueen(Color.BLACK).setPosition("d1"));
+		row.add(Piece.createKing(Color.BLACK).setPosition("e1"));
+		row.add(Piece.createBishop(Color.BLACK).setPosition("f1"));
+		row.add(Piece.createKnight(Color.BLACK).setPosition("g1"));
+		row.add(Piece.createRook(Color.BLACK).setPosition("h1"));
+		return row;
+	}
+
+	private ArrayList<Piece> createBlackPawnRow() {
+		ArrayList<Piece> row = new ArrayList<Piece>(8);
+		row.add(Piece.createPawn(Color.BLACK).setPosition("a2"));
+		row.add(Piece.createPawn(Color.BLACK).setPosition("b2"));
+		row.add(Piece.createPawn(Color.BLACK).setPosition("c2"));
+		row.add(Piece.createPawn(Color.BLACK).setPosition("d2"));
+		row.add(Piece.createPawn(Color.BLACK).setPosition("e2"));
+		row.add(Piece.createPawn(Color.BLACK).setPosition("f2"));
+		row.add(Piece.createPawn(Color.BLACK).setPosition("g2"));
+		row.add(Piece.createPawn(Color.BLACK).setPosition("h2"));
+		return row;
+	}	
+	
+	private ArrayList<Piece> createWhitePawnRow() {
+		ArrayList<Piece> row = new ArrayList<Piece>(8);
+		row.add(Piece.createPawn(Color.WHITE).setPosition("a7"));
+		row.add(Piece.createPawn(Color.WHITE).setPosition("b7"));
+		row.add(Piece.createPawn(Color.WHITE).setPosition("c7"));
+		row.add(Piece.createPawn(Color.WHITE).setPosition("d7"));
+		row.add(Piece.createPawn(Color.WHITE).setPosition("e7"));
+		row.add(Piece.createPawn(Color.WHITE).setPosition("f7"));
+		row.add(Piece.createPawn(Color.WHITE).setPosition("g7"));
+		row.add(Piece.createPawn(Color.WHITE).setPosition("h7"));
+		return row;
 	}
 	
-	private ArrayList<Piece> createPawnRow(Color color) {
-		ArrayList<Piece> arr = new ArrayList<Piece>(8);
-		for (int i=0; i<8; i++)
-			arr.add(Piece.createPawn(color));
-		return arr;
-	}
-	
-	private ArrayList<Piece> createBlankRow() {
-		ArrayList<Piece> arr = new ArrayList<Piece>(8);
-		for (int i=0; i<8; i++)
-			arr.add(Piece.createNoPiece());
-		return arr;
+	private ArrayList<Piece> createBlankRow(String basePosition) {
+		ArrayList<Piece> row = new ArrayList<Piece>(8);
+		for (int i=0; i<8; i++) {
+			row.add(Piece.createNoPiece().setPosition(basePosition));
+			basePosition = Position.increaseColumn(basePosition);
+		}
+		return row;
 	}
 	
 	private double countPawnBonus(Piece.Color color) {
