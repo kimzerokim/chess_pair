@@ -170,11 +170,9 @@ public class Board {
 		}
 		
 		// calculate bonus
-		for (Integer count : storage) {
-			if (count >= 2) {
+		for (Integer count : storage)
+			if (count >= 2)
 				retBonus += (minusRate * count);
-			}
-		}
 		
 		return retBonus;
 	}

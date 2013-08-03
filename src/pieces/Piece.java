@@ -9,8 +9,8 @@ public class Piece {
 	public static final char QUEEN_REPRESENTATION = 'q';
 	public static final char KING_REPRESENTATION = 'k';
 
-	public enum Color 	{WHITE, BLACK, BLANK}
-	public enum Type 	{
+	public enum Color {WHITE, BLACK, BLANK}
+	public enum Type {
 		ROOK(5.0), KNIGHT(2.5), BISHOP(3.0), QUEEN(9.0), KING(0.0), PAWN(1.0), NO_PIECE(0.0);
 		
 		private double score=0.0;
@@ -96,30 +96,5 @@ public class Piece {
 	
 	public double getScore() {
 		return type.getScore();
-	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object piece) {
-		if (this == piece)
-			return true;
-		if (piece == null)
-			return false;
-		if (getClass() != piece.getClass())
-			return false;
-		Piece other = (Piece) piece;
-		if (color != other.color)
-			return false;
-		if (type != other.type)
-			return false;
-		return true;
 	}
 }
