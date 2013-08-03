@@ -13,4 +13,14 @@ public class PositionTest extends TestCase {
 		assertEquals(0, Position.getX(pos));
 		assertEquals(7, Position.getY(pos));
 	}
+	
+	public void testIncreaeRow() throws Exception {
+		String pos = "c5";
+		assertEquals("c6", Position.increaseRow(pos));
+	}
+	
+	public void testIncreaseColumn() throws Exception {
+		String pos = "c5";
+		assertEquals("d5", Position.increaseColumn(pos));
+	}
 }

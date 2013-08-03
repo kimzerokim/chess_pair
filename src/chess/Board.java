@@ -1,6 +1,7 @@
 package chess;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import pieces.Piece;
 import pieces.Piece.Color;
@@ -103,6 +104,30 @@ public class Board {
 		rows = new ArrayList<ArrayList<Piece>>();
 		for (int i=0; i<8; i++)
 			rows.add(createBlankRow());
+	}
+	
+	private void initWhitePieces() {
+		final Color white = Color.WHITE;
+
+		List<Piece> pawns = new ArrayList<Piece>(8);
+		for (int i=0; i<8; i++) {
+			pawns.add(Piece.createPawn(white));
+		}
+		
+		pawns.get(0).setPosition("a7");
+		pawns.get(1).setPosition("b7");
+		pawns.get(2).setPosition("c7");
+		pawns.get(3).setPosition("d7");
+		pawns.get(4).setPosition("e7");
+		pawns.get(5).setPosition("f7");
+		pawns.get(6).setPosition("g7");
+		pawns.get(7).setPosition("h7");
+		
+		
+		// set piece position
+		
+		// set board to piece
+		// display method modify
 	}
 	
 	private ArrayList<Piece> createWhiteRow() {
